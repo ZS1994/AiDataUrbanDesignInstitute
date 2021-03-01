@@ -17,6 +17,16 @@ public class AuthVO {
     // shiro的sessionid
     private String sessionId;
 
+    /**
+     * 状态：success 认证成功。 error 认证失败
+     */
+    private String status;
+
+    /**
+     * JWT 的 token
+     */
+    private String token;
+
     public AuthVO(String message) {
         this.message = message;
     }
