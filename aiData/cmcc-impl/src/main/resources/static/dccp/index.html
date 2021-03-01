@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<!-- saved from url=(0127)file:///D:/%E6%88%91%E7%9A%84%E6%96%87%E4%BB%B6/%E6%96%B0%E5%BB%BA%E6%96%87%E4%BB%B6%E5%A4%B9/%E6%B5%8B%E8%AF%95/index.jsp.html -->
+<html style="font-size: 100px;">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta content="always" name="referrer">
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <title>11111111</title>
+
+
+    <script type="text/javascript" src="RSA.js"></script>
+    <script type="text/javascript" src="BigInt.js"></script>
+    <script type="text/javascript" src="Barrett.js"></script>
+    <script type="text/javascript">
+        var publicExponent = "10001";
+        var modulus = "835c6f95da7874e48401ec820e49fed9ca3a94e696b8be51743c93afa16843a8ad186fd7ea55144124fafda0d71a3da3a0b7daea950e8e11509732c718f0e829bc75a944ad81e53955426326cd7ad6ff535106bf0ce16f2aef19f1a8a6033851c20ff46b35f8379051452b2d0c611a3475ae1d1b05c6076f4465d2bef849d3ce16c4bdbe0f3fa71b59038aca63aac576d4d32ff48ceb0bdd600e0379b98fe093168d2363e5467d90887832d785b683757be9a8b20e32950d5b86a5f2b780f3d8130d5d5582af53b3046f251542784aae2cd31773fdb797612c0cffbf011c62250c3badf2edef384514bc8fe18a365fedb68e88146973d7ae15e6d9395bcc2f13";
+        setMaxDigits(260);
+        var key = new RSAKeyPair(publicExponent, "", modulus);
+
+
+
+
+
+
+
+
+    </script>
+
+
+    <script type="text/javascript">
+	MessageUtil = function() {
+        this.messages = {MSG_SHARE_DESC:"今天实力大爆发啊，一会儿的功夫猜对了{0}首歌曲，这节奏，猜歌王就是我的了！不服来战啊~",MSG_060004:"您要兑换的礼品已经兑换完！",MSG_060003:"您的积分不足！",MSG_060002:"您要兑换的礼品已经过期！",MSG_060001:"您要兑换的礼品不存在！",MSG_HELP_DESC:"快来助我一臂之力，你听听这首歌叫啥？哥们儿的猜歌王之称就靠你了！",MSG_020008:"请先注册会员！",MSG_020007:"对不起，修改密码失败，请重试！",MSG_ORDER_040005:"产品不允许直接订购！",MSG_020006:"对不起，注册失败，请重试！",MSG_020005:"您的手机号已经注册",MSG_020004:"您输入的密码格式不正确！",MSG_020003:"验证码输入有误，请重新获取！连续输错{0}次，账号将锁定！",MSG_020002:"密码连续输错{0}次，账号已锁定，请{1}分钟后再试！",MSG_020001:"密码输入有误，连续输错{0}次，账号将锁定！",MSG_PAGE_080007:"猜歌答案错误",MSG_PAGE_080001:"指定的活动不存在",MSG_ORDER_00103:"您已开通本产品，无需重复开通！",MSG_010003:"验证码下发失败，请稍后重试！",MSG_010002:"您今天获取验证码次数已用完，请{0}小时后再获取！",MSG_080009:"当天求助次数已达3次，不允许再次求助",MSG_010001:"您获取验证码的次数过于频繁，请{0}秒后重试！",MSG_PAGE_000003:"非指定范围用户",MSG_999999:"系统繁忙，请稍后再试!",MSG_ECOP_981025:"尊敬的客户，由于您的余额不足，订购失败！",MSG_PAGE_00011:"密码修改成功！",MSG_PAGE_00010:"会员注册成功！",MSG_000003:"暂不支持行业应用卡、数据卡、信息机使用 ！",MSG_000002:"请输入广东移动手机号码！",MSG_020010:"验证码连续输错{0}次，账号已锁定，请{1}分钟后再试！",MSG_PAGE_00009:"登录成功！",MSG_PAGE_080019:"答题时间已过",MSG_PAGE_00008:"兑换成功！",MSG_PAGE_00007:"兑换失败，请稍后重试！",APP_TITLE:"广东数据产品及内容客户渠道传播平台",MSG_PAGE_080017:"不能向自己求助",MSG_PAGE_00006:"短信验证码下发成功！",MSG_PAGE_00005:"对不起，您还没有登录，请登录后重试！",MSG_PAGE_00004:"您两次输入的密码不一致！",MSG_PAGE_00003:"请输入验证码！",MSG_PAGE_00002:"请输入密码！",MSG_PAGE_00001:"您输入的手机号格式不正确！"};
+		
+		this.getMessage = function(key) {
+			return eval("this.messages." + key);
+		};
+		
+		this.getMessage = function(key, parm) {
+			var value = "";
+			if (key == null || key == "") {
+				return
+			}
+			
+			value = eval("this.messages." + key);
+			for(i in parm){
+				value = value.replace("{" + i +"}", parm[i]);
+			}
+			return value;
+		};
+	};
+	var messageUtil = new MessageUtil();
+
+
+
+
+
+
+
+
+    </script>
+
+<body class="index_bg">
+<div class="wrapper">
+    <!--登录-->
+    <div class="pop_wap" style="">
+        <div class="pop_inner">
+            <div class="pop_box pop_box2">
+                <div class="pop_login">
+                    <div class="input input-phone">
+                        <input type="text" id="phone" placeholder="请输入广东移动手机号码" maxlength="11">
+                    </div>
+                    <div class="input input-code clearfix">
+                        <input type="text" id="authcode" placeholder="输入验证码" maxlength="6">
+                        <button type="button" class="btn-code fr" onclick="startSendSms(this)">获取验证码</button>
+                    </div>
+                    <div class="pop_btns flex flex_v flex_align_center">
+                        <span class="btn btn_submit">登 录</span>
+                        <span class="btn btn_submit2">一键登录<em>（本机号码）</em></span>
+                    </div>
+                </div>
+            </div>
+            <div class="pop_close zero_login" onclick="closePopwap()"></div>
+        </div>
+    </div>
+
+    <script src="jquery.min.js"></script>
+    <script src="layer.js"></script>
+    <script src="swiper.3.4.1.min.js"></script>
+    <script src="YDRZ.min.js"></script>
+    <script src="gmccapp.js"></script>
+    <script src="TGJSBridge.js"></script>
+    <script src="common.js"></script>
+    <script src="service.js"></script>
+    <script src="appFrame.js"></script>
+    <script src="gd_sdc.js"></script>
+    <script src="gd_sdc_load.js"></script>
+    <script src="gd_cmpass2.js"></script>
+    <script src="login.js"></script>
+    <script src="jweixin-1.0.0.js" type="text/javascript"></script>
+    <script src="weixin.share.js" type="text/javascript"></script>
+    <script src="util.js"></script>
+    <script src="index.js"></script>
+
+    <script type="text/javascript">
+        var ctx = '/dccp-portal';
+        var loginTel = '13502898808';
+        var loginTypeStatus = '6';
+        var channelId = 'null';
+        var loginStatus = "3";
+        var mobileReg = "^[1-9]\\d{10}$";
+        var appid_new = "300011877774";
+        var messageNew = "2020-10-20a00db36c-50e4-4f1a-87a4-5e8e5bf202ca";
+        var activityId = 'ACT20200427000000011';
+    </script>
+</div>
+</body>
+</html>
