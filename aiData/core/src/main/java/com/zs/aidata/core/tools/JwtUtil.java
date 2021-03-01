@@ -22,7 +22,7 @@ import java.util.Map;
 @Slf4j
 public class JwtUtil {
 
-    String SECRET = "secret123456";
+    static String SECRET = "secret123456";
 
     /**
      * 生成一个TOKEN
@@ -30,7 +30,7 @@ public class JwtUtil {
      * @param params 参数
      * @return
      */
-    public String createToken(Map<String, String> params) {
+    public static String createToken(Map<String, String> params) {
         String token = "";
         try {
             Algorithm algorithm = Algorithm.HMAC256(SECRET);
@@ -52,7 +52,7 @@ public class JwtUtil {
     }
 
 
-    public DecodedJWT verifierToken(String jwtToken) {
+    public static DecodedJWT verifierToken(String jwtToken) {
         String token = jwtToken;
         try {
             Algorithm algorithm = Algorithm.HMAC256(SECRET);
