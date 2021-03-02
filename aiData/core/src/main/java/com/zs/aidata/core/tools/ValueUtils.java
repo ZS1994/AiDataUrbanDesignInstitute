@@ -11,9 +11,7 @@ import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * 一些通用工具
@@ -83,10 +81,16 @@ public class ValueUtils {
             // 拿到该类
             Class<?> clz = object.getClass();
             // 获取实体类的所有属性，返回Field数组
-            Field[] fields = clz.getDeclaredFields();
+            List<Field> fieldList = new ArrayList<>();
+            //当父类为null的时候说明到达了最上层的父类(Object类).
+            while (clz != null) {
+                fieldList.addAll(Arrays.asList(clz.getDeclaredFields()));
+                //得到父类,然后赋给自己
+                clz = clz.getSuperclass();
+            }
             // 找出field
             Field field = null;
-            for (Field f : fields) {
+            for (Field f : fieldList) {
                 if (f.getName().equals(fieldName)) {
                     field = f;
                     break;

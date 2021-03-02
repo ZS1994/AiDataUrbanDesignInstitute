@@ -51,6 +51,30 @@ public class Constans {
     public static final String FLAG_N = "N";
 
     public static String KEY_GMCC_SESSION_ID = "GMCC_SESSION_ID";
+
+    /**
+     * JWT的KEY：用户账号
+     */
+    public static String JWT_USER_NUMBER = "USER_NUMBER";
+    /**
+     * JWT的KEY：用户权限集合
+     */
+    public static String JWT_PERMISSION_LIST = "PERMISSION_LIST";
+
+
+    /**
+     * shiro的KEY：用户权限集合
+     */
+    public static String SHIRO_PERMISSION_LIST = "PERMISSION_LIST";
+
+    /**
+     * 三种状态
+     */
+    public static String STATUS_SUCCESS = "success";
+    public static String STATUS_FAIL = "fail";
+    public static String STATUS_ERROR = "error";
+
+
     /**
      * 从权限拦截器中尝试获取当前用户，一定会有一个用户，如果未登录那么取的就是一个游客用户
      *

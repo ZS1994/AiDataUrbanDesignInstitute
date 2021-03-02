@@ -1,5 +1,6 @@
 package com.zs.aidata.core.sys.login.vo;
 
+import com.zs.aidata.core.tools.BaseEntityVO;
 import lombok.Data;
 
 /**
@@ -9,9 +10,16 @@ import lombok.Data;
  * @since 2021/2/22
  */
 @Data
-public class LoginInputVO {
-    private String username;
+public class LoginInputVO extends BaseEntityVO {
 
-    private String password;
+    /**
+     * 账号
+     */
+    private String userNumber;
+
+    /**
+     * 密码
+     */
+    private String userPassword;
 
 }

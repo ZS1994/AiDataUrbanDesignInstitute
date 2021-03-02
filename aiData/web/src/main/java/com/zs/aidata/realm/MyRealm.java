@@ -1,5 +1,6 @@
 package com.zs.aidata.realm;
 
+import com.zs.aidata.core.tools.Constans;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.*;
@@ -66,12 +67,6 @@ public class MyRealm extends AuthorizingRealm {
          * 参数3：当前realm的名称
          * 如果密码认证成功则返回一个用户身份对象，如果密码认证失败，则shiro会抛出异常
          */
-        Subject subject = SecurityUtils.getSubject();
-        Session session = subject.getSession();
-        List<String> permissionList = new ArrayList<>();
-        permissionList.add("test1");
-        permissionList.add("test2");
-        session.setAttribute("permissionList", permissionList);
         return new SimpleAuthenticationInfo(username, password, getName());
     }
 
@@ -87,7 +82,7 @@ public class MyRealm extends AuthorizingRealm {
         SimpleAuthorizationInfo authorizationInfo = new SimpleAuthorizationInfo();
         Subject subject = SecurityUtils.getSubject();
         Session session = subject.getSession();
-        List<String> permissionList = (List<String>) session.getAttribute("permissionList");
+        List<String> permissionList = (List<String>) session.getAttribute(Constans.SHIRO_PERMISSION_LIST);
         Set<String> permissionSet = new HashSet<>(permissionList);
         authorizationInfo.setStringPermissions(permissionSet);
         return authorizationInfo;

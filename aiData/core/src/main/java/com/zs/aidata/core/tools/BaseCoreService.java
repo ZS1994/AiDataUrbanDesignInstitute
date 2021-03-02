@@ -25,8 +25,13 @@ public class BaseCoreService {
     }
 
 
-    public void checkNotEmpty(Object obj, String... fieldNames) throws Exception {
-        ValueUtils.checkNotEmpty(obj, fieldNames);
+    public void checkNotEmpty(Object obj, String... fieldNames) throws AiDataApplicationException {
+        try {
+            ValueUtils.checkNotEmpty(obj, fieldNames);
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new AiDataApplicationException(e.toString());
+        }
     }
 
 }

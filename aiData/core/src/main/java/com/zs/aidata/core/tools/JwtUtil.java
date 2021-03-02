@@ -66,8 +66,8 @@ public class JwtUtil {
             //无效的签名/声明
             log.error("无效的签名");
             e.printStackTrace();
+            throw new AiDataApplicationException("无效的签名");
         }
-        return null;
     }
 
 }

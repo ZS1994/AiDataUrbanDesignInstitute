@@ -26,6 +26,7 @@ public class ControllerExceptionHandler {
     //返回的状态码
     @ResponseStatus(value = HttpStatus.INTERNAL_SERVER_ERROR)     //服务内部错误
     public Map<String, Object> handlerException(Exception ex) {
+        ex.printStackTrace();
         Map<String, Object> result = new HashMap<>();
         result.put("error", "Internal Server Error");
         result.put("message", ex.getMessage());
