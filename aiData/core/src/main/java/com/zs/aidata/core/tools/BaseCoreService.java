@@ -29,7 +29,6 @@ public class BaseCoreService {
         try {
             ValueUtils.checkNotEmpty(obj, fieldNames);
         } catch (Exception e) {
-            e.printStackTrace();
             throw new AiDataApplicationException(e.toString());
         }
     }
