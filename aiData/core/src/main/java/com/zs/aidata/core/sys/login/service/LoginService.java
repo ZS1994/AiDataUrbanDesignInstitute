@@ -40,6 +40,11 @@ public class LoginService extends BaseCoreService implements ILoginService {
         String resStr = RestTemplateUtils.execHttpRequest(URL_CENTER_LOGIN, "POST", param, new HashMap<>());
         log.info(resStr);
         AuthVO resObj = JSONObject.parseObject(resStr, AuthVO.class);
+        // 如果登录认证不成功，则直接返回校验结果给前端
+        if (isNotEmpty(resObj) && Constans.STATUS_ERROR.equals(resObj.getStatus())) {
+            return resObj;
+        }
+
         // 此时，获取到jwt的token后立即进行shiro的身份认证来获得shiro的token
         UsernamePasswordToken shiroToken = new UsernamePasswordToken(inputVO.getUserNumber(), inputVO.getUserPassword());
         // 获取权限操作对象，利用这个对象来完成登录操作

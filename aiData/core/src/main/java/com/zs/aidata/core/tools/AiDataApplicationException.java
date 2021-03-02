@@ -25,12 +25,14 @@ public class AiDataApplicationException extends RuntimeException {
         }
         fillInStackTrace();
         message = modelMessage;
+        this.printStackTrace();
     }
 
 
     public AiDataApplicationException(String msg) {
         super(msg);
         message = msg;
+        this.printStackTrace();
     }
 
     @Override
