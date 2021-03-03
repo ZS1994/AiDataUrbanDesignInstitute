@@ -55,7 +55,7 @@ public class LoginController {
         return new AuthVO("登出成功");
     }
 
-    @RequiresPermissions("test1")
+    @RequiresPermissions("core/loginController/test1")
     @PostMapping("test1")
     @ApiOperation(value = "测试1", notes = "测试1")
     public AuthVO test1() {
@@ -64,7 +64,7 @@ public class LoginController {
     }
 
 
-    @RequiresPermissions("test2")
+    @RequiresPermissions("core/loginController/test2")
     @PostMapping("test2")
     @ApiOperation(value = "测试2", notes = "测试2")
     public AuthVO test2() {

@@ -18,7 +18,7 @@ public class BaseEntityVO implements Serializable {
     private Integer pId;
 
     // 应用id
-    private String appId;
+    private Integer appId;
 
     // 创建人id
     private String creationById;
