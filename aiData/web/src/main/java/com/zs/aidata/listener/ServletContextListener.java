@@ -1,12 +1,18 @@
 package com.zs.aidata.listener;
 
+import com.alibaba.fastjson.JSONArray;
 import com.zs.aidata.core.tools.AnnotationUtil;
+import com.zs.aidata.core.tools.Constans;
+import com.zs.aidata.core.tools.RestTemplateUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -17,6 +23,9 @@ import java.util.Map;
  */
 @Slf4j
 public class ServletContextListener implements ApplicationListener<ContextRefreshedEvent> {
+
+    String URL_CENTER_UPDATE_ALL_PERMISSION = "http://127.0.0.1:8080/aidata/core/coreSysPermissionController/updateAllPermissionByAuto";
+
     @Override
     public void onApplicationEvent(ContextRefreshedEvent contextRefreshedEvent) {
         // 先获取到 application 上下文
@@ -33,6 +42,29 @@ public class ServletContextListener implements ApplicationListener<ContextRefres
         try {
             // 获取所有的权限注解的方法，然后与数据库比对，如果有不一样的就修改
             Map<String, Map<String, Object>> resMap = annotationUtil.getAllAddTagAnnotationUrl("classpath*:com/zs/aidata/**/controller/*.class", RequiresPermissions.class);
+            // 填充参数，请求center端更新权限列表
+            List<Map<String, String>> paramList = new ArrayList<>();
+            for (String urlMethod : resMap.keySet()) {
+                String permUrl = urlMethod.split(":")[0];
+                String permMethod = urlMethod.split(":")[1];
+                Map<String, Object> permMap = resMap.get(urlMethod);
+                String permCode = ((String[]) permMap.get("value"))[0];
+                // 封装必须得权限数据
+                Map<String, String> permMapTmp = new HashMap<>();
+                permMapTmp.put("permUrl", permUrl);
+                permMapTmp.put("permMethod", permMethod);
+                permMapTmp.put("permCode", permCode);
+                permMapTmp.put("permName", permCode);
+                permMapTmp.put("appId", Constans.APP_ID);
+                paramList.add(permMapTmp);
+            }
+            // 请求center端
+            Map<String, String> paramMap = new HashMap<>();
+            paramMap.put("appId", Constans.APP_ID);
+            paramMap.put("coreSysPermissionDOListJsonArr", JSONArray.toJSONString(paramList));
+            RestTemplateUtils.execHttpRequest(
+                    URL_CENTER_UPDATE_ALL_PERMISSION,
+                    "POST", paramMap, new HashMap<>());
             log.info(resMap.toString());
         } catch (Exception e) {
             e.printStackTrace();

@@ -33,6 +33,8 @@ public class AnnotationUtil {
 
     /**
      * 获取指定包下所有添加了执行注解的方法信息
+     * KEY：url+method ， VAULE：权限详细信息
+     * 例如：{core/loginController:test1={logical=AND, value=[core/loginController/test1]}, core/loginController:test2={logical=AND, value=[core/loginController/test2]}}
      *
      * @param classPath          包名
      * @param tagAnnotationClass 指定注解类型

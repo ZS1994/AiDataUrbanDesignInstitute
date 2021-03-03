@@ -16,7 +16,6 @@ import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
 
 import javax.inject.Named;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;

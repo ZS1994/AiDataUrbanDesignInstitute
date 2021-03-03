@@ -74,6 +74,10 @@ public class Constans {
     public static String STATUS_FAIL = "fail";
     public static String STATUS_ERROR = "error";
 
+    /**
+     * 该工程的appId
+     */
+    public static String APP_ID = "URBAN";
 
     /**
      * 从权限拦截器中尝试获取当前用户，一定会有一个用户，如果未登录那么取的就是一个游客用户
