@@ -106,7 +106,7 @@ public class ValueUtils {
              * 如果出现NoSuchMethod异常 就说明它找不到那个gettet方法 需要做个规范
              */
             Method m = (Method) object.getClass().getMethod("get" + getMethodName(field.getName()));
-            String val = (String) m.invoke(object);// 调用getter方法获取属性值
+            Object val = m.invoke(object);// 调用getter方法获取属性值
             if (isNotEmpty(val)) {
                 value = val;
             }
@@ -117,6 +117,12 @@ public class ValueUtils {
     // 把一个字符串的第一个字母大写、效率是最高的、
     private static String getMethodName(String fildeName) {
         byte[] items = fildeName.getBytes();
+        // 如果第二个字母就是大写的话，那么第一个字母就不大写
+        if (items.length >= 2) {
+            if (Character.isUpperCase((char) items[1])) {
+                return new String(items);
+            }
+        }
         items[0] = (byte) ((char) items[0] - 'a' + 'A');
         return new String(items);
     }
