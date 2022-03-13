@@ -1,8 +1,10 @@
 server:
   port: 8180
   servlet:
-    context-path: /aidata
+    context-path: /aidata_udi
 spring:
+  application:
+    name: aidata_udi_8180
   profiles:
     active: dev
   #数据库连接配置
@@ -21,3 +23,22 @@ mybatis:
   configuration:
     map-underscore-to-camel-case: true
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+# 服务注册中心
+eureka:
+  instance:
+    instance-id: aidata_udi
+    homename: aidata_udi #eureka的服务端的实例名称
+    prefer-ip-address: true #可以显示IP地址
+  client:
+    #false表示不向注册中心注册自己
+    register-with-eureka: true
+    #false表示自己端就是注册中心，我的职责就是维护服务实例，并不需要去检索服务
+    fetch-registry: true
+    service-url:
+      #设置与Eureka server交互的地址查询服务和注册服务都需要依赖这个地址
+      defaultZone: http://47.115.148.250:9456/aidata/eureka/
+aidata:
+  ip:
+    map:
+      # 开启ip转换，局域网转公网，方便本地调试
+      enable: true

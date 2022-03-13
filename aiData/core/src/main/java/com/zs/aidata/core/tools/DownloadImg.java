@@ -12,10 +12,10 @@ import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.springframework.stereotype.Component;
 
 /**
- * 2017-11-20
  * 下载图片
  *
  * @author 张顺
+ * @since 2017-11-20
  */
 @Slf4j
 @Component
@@ -124,7 +124,8 @@ public class DownloadImg {
         DownloadImg dli = new DownloadImg();
         dli.setPathRoot(Constans.PATH_ROOT);
         try {
-            dli.readInputStream(getImageinputFromNetByUrl(url), new FileOutputStream(dli.pathRoot + NameOfDate.getDir() + "/" + fileName));
+            dli.readInputStream(getImageinputFromNetByUrl(url),
+                    new FileOutputStream(dli.pathRoot + NameOfDate.getDir() + "/" + fileName));
         } catch (FileNotFoundException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();

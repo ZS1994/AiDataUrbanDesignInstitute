@@ -113,7 +113,7 @@ public class ShiroConfig {
         shiroFilterFactoryBean.setLoginUrl("/");
         // 配置登录成功后的地址
         shiroFilterFactoryBean.setSuccessUrl("/success");
-        // 配置没有权限的地址
+        // 配置没有权限的地址 
         shiroFilterFactoryBean.setUnauthorizedUrl("/noPermission");*/
 
         // 配置权限的拦截规则

@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSONArray;
 import com.zs.aidata.core.tools.AnnotationUtil;
 import com.zs.aidata.core.tools.Constans;
 import com.zs.aidata.core.tools.RestTemplateUtils;
+import com.zs.aidata.sys.service.ISysPermissionService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.context.ApplicationContext;
@@ -22,9 +23,7 @@ import java.util.Map;
  * @since 2020/11/1
  */
 @Slf4j
-public class ServletContextListener implements ApplicationListener<ContextRefreshedEvent> {
-
-    String URL_CENTER_UPDATE_ALL_PERMISSION = "http://127.0.0.1:8080/aidata/core/coreSysPermissionController/updateAllPermissionByAuto";
+public class UploadPermServletContextListener implements ApplicationListener<ContextRefreshedEvent> {
 
     @Override
     public void onApplicationEvent(ContextRefreshedEvent contextRefreshedEvent) {
@@ -41,7 +40,10 @@ public class ServletContextListener implements ApplicationListener<ContextRefres
         AnnotationUtil annotationUtil = applicationContext.getBean(AnnotationUtil.class);
         try {
             // 获取所有的权限注解的方法，然后与数据库比对，如果有不一样的就修改
-            Map<String, Map<String, Object>> resMap = annotationUtil.getAllAddTagAnnotationUrl("classpath*:com/zs/aidata/**/controller/*.class", RequiresPermissions.class);
+            Map<String, Map<String, Object>> resMap =
+                    annotationUtil.getAllAddTagAnnotationUrl("classpath*:com/zs/aidata/**/controller/*.class",
+                            RequiresPermissions.class);
+            log.info(resMap.toString());
             // 填充参数，请求center端更新权限列表
             List<Map<String, String>> paramList = new ArrayList<>();
             for (String urlMethod : resMap.keySet()) {
@@ -59,16 +61,14 @@ public class ServletContextListener implements ApplicationListener<ContextRefres
                 paramList.add(permMapTmp);
             }
             // 请求center端
-            Map<String, String> paramMap = new HashMap<>();
-            paramMap.put("appId", Constans.APP_ID);
-            paramMap.put("coreSysPermissionDOListJsonArr", JSONArray.toJSONString(paramList));
-            RestTemplateUtils.execHttpRequest(
-                    URL_CENTER_UPDATE_ALL_PERMISSION,
-                    "POST", paramMap, new HashMap<>());
-            log.info(resMap.toString());
+            // 获取service
+            ISysPermissionService iSysPermissionService = applicationContext.getBean(ISysPermissionService.class);
+            if (iSysPermissionService != null) {
+                iSysPermissionService.updateAllPermissionByAuto(paramList);
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        log.info("--------------------------------------");
+        log.info("-----------------自动上传更新本工程权限结束---------------------");
     }
 }

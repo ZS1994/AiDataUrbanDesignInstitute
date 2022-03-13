@@ -34,7 +34,8 @@ public class AnnotationUtil {
     /**
      * 获取指定包下所有添加了执行注解的方法信息
      * KEY：url+method ， VAULE：权限详细信息
-     * 例如：{core/loginController:test1={logical=AND, value=[core/loginController/test1]}, core/loginController:test2={logical=AND, value=[core/loginController/test2]}}
+     * 例如：{core/loginController:test1={logical=AND, value=[core/loginController/test1]}, core/loginController:test2={
+     * logical=AND, value=[core/loginController/test2]}}
      *
      * @param classPath          包名
      * @param tagAnnotationClass 指定注解类型
@@ -42,7 +43,8 @@ public class AnnotationUtil {
      * @return
      * @throws Exception
      */
-    public <T> Map<String, Map<String, Object>> getAllAddTagAnnotationUrl(String classPath, Class<T> tagAnnotationClass) throws Exception {
+    public <T> Map<String, Map<String, Object>> getAllAddTagAnnotationUrl(String classPath,
+                                                                          Class<T> tagAnnotationClass) throws Exception {
         Map<String, Map<String, Object>> resMap = new HashMap<>();
         ResourcePatternResolver resolver = ResourcePatternUtils.getResourcePatternResolver(resourceLoader);
         MetadataReaderFactory metaReader = new CachingMetadataReaderFactory(resourceLoader);
@@ -107,7 +109,8 @@ public class AnnotationUtil {
 
 
     private Map<String, Object> getPathByMethod(MethodMetadata annotatedMethod) {
-        Map<String, Object> annotationAttributes = annotatedMethod.getAnnotationAttributes(GetMapping.class.getCanonicalName());
+        Map<String, Object> annotationAttributes =
+                annotatedMethod.getAnnotationAttributes(GetMapping.class.getCanonicalName());
         if (annotationAttributes != null && annotationAttributes.get(VALUE) != null) {
             return annotationAttributes;
         }

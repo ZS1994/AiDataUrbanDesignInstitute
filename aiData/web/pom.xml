@@ -28,6 +28,11 @@
 			<artifactId>cmcc-impl</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
+		<!-- eureka 微服务-->
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+		</dependency>
 	</dependencies>
 
 </project>

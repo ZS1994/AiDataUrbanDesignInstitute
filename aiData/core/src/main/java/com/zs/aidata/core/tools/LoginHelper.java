@@ -10,6 +10,8 @@ import java.io.*;
 import java.util.*;
 
 /**
+ * 中国移动登录助手
+ *
  * @author 张顺
  * @since 2020/10/12
  */
@@ -106,7 +108,8 @@ public class LoginHelper {
         MultiValueMap<String, String> param = new LinkedMultiValueMap<>();
         param.add("reqJson", "{\"mobileNumber\":\"15022084174\",\"bussnissId\":\"differentNets\",\"header\":{\"nonce\":\"bgacedfbfhjegsjqtorfyibmnigm86dv\",\"timestamp\":1602435157946,\"sign\":\"AD31EAC421AF9717FC3763BA4DF68B5F\"}}");
         HttpEntity<Map> requestEntity = new HttpEntity<Map>(param, headers);
-        ResponseEntity<String> response = rest.exchange(DUANXIN_YANZHENGMA_URL, HttpMethod.POST, requestEntity, String.class);
+        ResponseEntity<String> response = rest.exchange(DUANXIN_YANZHENGMA_URL, HttpMethod.POST, requestEntity,
+                String.class);
         String str = response.getBody();
         log.info(str);
     }
@@ -123,7 +126,8 @@ public class LoginHelper {
         InputStream inputStream = null;
         OutputStream outputStream = null;
         try {
-            ResponseEntity<byte[]> response = rest.exchange(IMG_YANZHENGMA_URL, HttpMethod.GET, requestEntity, byte[].class);
+            ResponseEntity<byte[]> response = rest.exchange(IMG_YANZHENGMA_URL, HttpMethod.GET, requestEntity,
+                    byte[].class);
             byte[] result = response.getBody();
 
             inputStream = new ByteArrayInputStream(result);
