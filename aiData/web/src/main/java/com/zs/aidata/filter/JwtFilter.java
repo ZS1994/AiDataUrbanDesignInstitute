@@ -1,13 +1,13 @@
 package com.zs.aidata.filter;
 
-import com.auth0.jwt.interfaces.Claim;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.zs.aidata.core.tools.AiDataApplicationException;
-import com.zs.aidata.core.tools.Constans;
 import com.zs.aidata.core.tools.JwtUtil;
 import com.zs.aidata.core.tools.ValueUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.catalina.connector.RequestFacade;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 import org.springframework.util.PatternMatchUtils;
 
 import javax.servlet.*;
@@ -18,11 +18,13 @@ import java.util.List;
 
 /**
  * 解析jwt的token
+ * todo 目前这个过滤没法区分是swagger过来的请求还是正常请求，所以我默认就是把开关关着，然后等上线后再打开
  *
  * @author 张顺
  * @since 2020/11/1
  */
 @Slf4j
+@Component
 public class JwtFilter implements Filter {
 
 
@@ -31,15 +33,17 @@ public class JwtFilter implements Filter {
     /**
      * 白名单
      */
-    List<String> WHITE_LIST = Arrays.asList("*/core/loginController/login");
+    List<String> WHITE_LIST = Arrays.asList("*/core/loginController/login", "*swagger*", "*/v2/api-docs");
 
     /**
      * JWT的开关，N：关，其他:开
      */
-    String SWITCH_JWT = "Y";
+    @Value("${aidata.jwt.switch}")
+    private String SWITCH_JWT;
 
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
+        log.info("jwt开关：{}", SWITCH_JWT);
         // 如果开关关闭那么直接放行所有请求
         if ("N".equals(SWITCH_JWT)) {
             filterChain.doFilter(servletRequest, servletResponse);
@@ -52,6 +56,7 @@ public class JwtFilter implements Filter {
         boolean isInWhiteList = PatternMatchUtils.simpleMatch(WHITE_LIST.toArray(new String[WHITE_LIST.size()]), url);
         if (isInWhiteList) {
             filterChain.doFilter(servletRequest, servletResponse);
+            log.info("白名单跳过{}", url);
             return;
         }
 

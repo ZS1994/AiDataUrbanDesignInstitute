@@ -37,7 +37,7 @@ public class MyILoadBalance implements ILoadBalance {
             //2147483647 因为int的最大整形数 , compareAndSet修改了就会返回true
             next = current >= 2147483647 ? 0 : current + 1;
         } while (!atomicInteger.compareAndSet(current, next));
-        log.info("*****第几次访问*****next**********" + next);
+        log.info("*****第几次访问*****next*****{}*****", next);
         return next;
     }
 

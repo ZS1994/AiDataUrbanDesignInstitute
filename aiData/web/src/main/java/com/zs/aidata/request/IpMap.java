@@ -1,5 +1,6 @@
 package com.zs.aidata.request;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -12,6 +13,7 @@ import java.util.Map;
  * @author 张顺
  * @since 2022/3/13
  */
+@Slf4j
 @Component
 public class IpMap {
     /**
@@ -36,12 +38,15 @@ public class IpMap {
      * @return
      */
     public String transIp(String privateIp) {
+        log.info("IP转换开关:{}", isTransIp);
         if (!isTransIp) {
             return privateIp;
         }
         for (String pIp : IP_MAP.keySet()) {
             if (privateIp.contains(pIp)) {
-                return privateIp.replace(pIp, IP_MAP.get(pIp));
+                String tranAfterIp = privateIp.replace(pIp, IP_MAP.get(pIp));
+                log.info("转换前IP：{}，转换后IP：{}", privateIp, tranAfterIp);
+                return tranAfterIp;
             }
         }
         return privateIp;

@@ -3,10 +3,10 @@ package com.zs.aidata.listener;
 import com.alibaba.fastjson.JSONArray;
 import com.zs.aidata.core.tools.AnnotationUtil;
 import com.zs.aidata.core.tools.Constans;
-import com.zs.aidata.core.tools.RestTemplateUtils;
 import com.zs.aidata.sys.service.ISysPermissionService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
@@ -25,6 +25,11 @@ import java.util.Map;
 @Slf4j
 public class UploadPermServletContextListener implements ApplicationListener<ContextRefreshedEvent> {
 
+    @Value("${server.port}")
+    private String port;
+    @Value("${server.servlet.context-path}")
+    private String rootStr;
+
     @Override
     public void onApplicationEvent(ContextRefreshedEvent contextRefreshedEvent) {
         // 先获取到 application 上下文
@@ -35,7 +40,8 @@ public class UploadPermServletContextListener implements ApplicationListener<Con
         // 获取 application 域对象，将查到的信息放到 application 域中
         ServletContext application = applicationContext.getBean(ServletContext.class);
         application.setAttribute("user", user);*/
-        log.info("项目启动成功。请访问地址：http://localhost:8080/aidata");
+        log.info("项目启动成功。请访问地址：http://localhost:{}{}", port, rootStr);
+        log.info("项目启动成功。Swagger访问地址：http://localhost:{}{}/swagger-ui.html", port, rootStr);
         log.info("--------------------------------------");
         AnnotationUtil annotationUtil = applicationContext.getBean(AnnotationUtil.class);
         try {
@@ -65,6 +71,7 @@ public class UploadPermServletContextListener implements ApplicationListener<Con
             ISysPermissionService iSysPermissionService = applicationContext.getBean(ISysPermissionService.class);
             if (iSysPermissionService != null) {
                 iSysPermissionService.updateAllPermissionByAuto(paramList);
+                log.info("-----------------自动上传更新本工程权限成功---------------------");
             }
         } catch (Exception e) {
             e.printStackTrace();

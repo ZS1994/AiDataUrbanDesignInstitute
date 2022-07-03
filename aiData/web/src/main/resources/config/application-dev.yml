@@ -1,0 +1,8 @@
+aidata:
+    ip:
+        map:
+            # 开启ip转换，局域网转公网，方便本地调试
+            enable: true
+    jwt:
+        # JWT的开关，N：关，其他:开，如果开关关闭那么直接放行所有请求
+        switch: N
